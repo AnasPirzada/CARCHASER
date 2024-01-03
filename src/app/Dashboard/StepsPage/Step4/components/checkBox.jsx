@@ -11,9 +11,9 @@ export const checkBox = ( { content } ) =>
     borderRadius: '12px 0px 0px 12px',
     backgroundColor: '#4E9C0B',
   };
-  const Para = {
-    width: isMobile ? '  120px' : '196px ',
-    height: isMobile ? ' 35.35px' : '48px ',
+  const StylePara = {
+    width: isMobile ? '80px' : '112px',
+    height: isMobile ? ' 25.35px' : '44px ',
     borderRadius: '0px 12px 12px 0px'
   };
 
@@ -44,7 +44,7 @@ export const checkBox = ( { content } ) =>
           </div>
         </Col>
         <Col xs={ 9 } lg={ 10 }>
-          <div className='shadow Para ms-0 ms-md-2' style={ Para }>
+          <div className='shadow StylePara ms-0 ms-md-4' style={ StylePara }>
             <p className=' my-0 text-start p-1 p-md-2 ' style={ textStyles } >
               { content }
             </p>

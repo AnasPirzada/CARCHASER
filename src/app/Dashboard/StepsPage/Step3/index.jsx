@@ -1,22 +1,32 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 import CheckBox from './components/checkBox.jsx';
+
 export const index = () =>
 {
+  const isMobile = useMediaQuery( { maxWidth: 768 } );
+
+  const ImgforCol = {
+    display: isMobile ? 'none' : 'block',
+
+  };
+
+
+
+
   const initialContent = [
     '2 sets of tire',
     'Window tint',
     'Aftermarket exhaust',
     'Aftermarket rims',
-
-  ];
-  const initialContentSeconCol = [
     'Roof rack',
     'Remote starter',
     'Aftermarket stereo',
     'Aftermarket spoiler',
 
   ];
+
   return (
     <div>
       <Container className='mt-5 shadow rounded-5 ' style={ { height: '619px' } }>
@@ -39,21 +49,16 @@ export const index = () =>
         </Row>
         <div className='d-flex justify-content-between align-items-center px-4' >
           <Row className=' mt-3 d-md-flex justify-content-between align-items-center' >
-            <Col lg={ 6 } xs={ 6 }>
-              { initialContent.map( ( item, index ) => (
-                <CheckBox key={ index } content={ item } />
-              ) ) }
-            </Col>
-            <Col lg={ 6 } xs={ 6 } className='ms-'>
-              { initialContentSeconCol.map( ( item, index ) => (
-                <CheckBox key={ index } content={ item } />
-              ) ) }
-            </Col>
+            { initialContent.map( ( item, index ) => (
+              <Col key={ index } lg={ 6 } xs={ 6 }>
+                <CheckBox content={ item } />
+              </Col>
+            ) ) }
           </Row>
           <Row className=' mt-3' >
             <Col lg={ 6 } xs={ 12 }>
               <img src='./PNG/6042 [Converted].png' alt=''
-              // style={ { width: '0%' } } 
+                style={ ImgforCol }
               />
             </Col>
           </Row>

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 import Step1 from './StepsPage/Step1/index.jsx';
 import Step2 from './StepsPage/Step2/index.jsx';
 import Step3 from './StepsPage/Step3/index.jsx';
 import Step4 from './StepsPage/Step4/index.jsx';
 import Step5 from './StepsPage/Step5/index.jsx';
 import Step6 from './StepsPage/Step6/index.jsx';
+import Step7 from './StepsPage/Step7/index.jsx';
 const stepsContent = [
   // Display "Hello" at index -1
   <Step1 />,
@@ -14,12 +16,14 @@ const stepsContent = [
   <Step4 />,
   <Step5 />,
   <Step6 />,
-  'Hello',
+  <Step7 />,
+  
 ];
 
 function Dashboard ()
 {
   const [ currentStep, setCurrentStep ] = useState( 0 );
+  const isMobile = useMediaQuery( { maxWidth: 768 } );
 
   const handleNext = () =>
   {
@@ -49,8 +53,8 @@ function Dashboard ()
               <div
                 className='d-flex justify-content-center align-items-center'
                 style={ {
-                  width: '42px',
-                  height: '40px',
+                  width: isMobile ? '27px' : '42px',
+                  height: isMobile ? '26px' : '40px',
                   borderRadius: '8px',
                   backgroundColor:
                     index < currentStep ? '#4E9C0B' : '#EBEBEB', // Change the condition for checkbox
@@ -63,8 +67,12 @@ function Dashboard ()
               </div>
               { index < stepsContent.length - 2 && (
                 <div
-                  className='ms-5'
-                  style={ { borderBottom: '2px solid #EBEBEB', width: '100px' } }
+                  className='ms-4 ms-md-5'
+                  style={ {
+                    borderBottom: '2px solid #EBEBEB',
+
+                    width: isMobile ? '33px' : '100px',
+                  } }
                 ></div>
               ) }
             </Col>
