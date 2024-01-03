@@ -7,12 +7,14 @@ import Step4 from './StepsPage/Step4/index.jsx';
 import Step5 from './StepsPage/Step5/index.jsx';
 import Step6 from './StepsPage/Step6/index.jsx';
 const stepsContent = [
+  // Display "Hello" at index -1
   <Step1 />,
   <Step2 />,
   <Step3 />,
   <Step4 />,
   <Step5 />,
-  <Step6 />
+  <Step6 />,
+  'Hello',
 ];
 
 function Dashboard ()
@@ -34,7 +36,6 @@ function Dashboard ()
       setCurrentStep( currentStep - 1 );
     }
   };
-
   return (
     <div>
       <Container className='mt-5'>
@@ -42,30 +43,39 @@ function Dashboard ()
           <p style={ { fontWeight: '500', fontSize: '32px', color: '#4C4C4C', fontFamily: 'Glory' } }>Upload Vehicle Details</p>
         </Row>
         <Row className='m-auto' style={ { width: '90%' } }>
-          { stepsContent.map( ( step, index ) => (
+          {/* Mapping steps with checkboxes */ }
+          { Array.from( { length: stepsContent.length - 1 }, ( _, index ) => (
             <Col key={ index } lg={ 2 } xs={ 2 }>
-              <div className='d-flex justify-content-center align-items-center' style={ {
-                width: '42px',
-                height: '40px',
-                borderRadius: '8px',
-                backgroundColor: index === currentStep ? '#4E9C0B' : '#EBEBEB'
-              } }>
-                { index === currentStep && (
-                  <img src="./checkboxTick.svg" alt="Checkbox" />
+              <div
+                className='d-flex justify-content-center align-items-center'
+                style={ {
+                  width: '42px',
+                  height: '40px',
+                  borderRadius: '8px',
+                  backgroundColor:
+                    index < currentStep ? '#4E9C0B' : '#EBEBEB', // Change the condition for checkbox
+                  position: 'relative',
+                } }
+              >
+                { index < currentStep && (
+                  <img src='./checkboxTick.svg' alt='Checkbox' />
                 ) }
               </div>
-              { index < stepsContent.length - 1 && (
-                <div className='ms-5' style={ { borderBottom: '2px solid #EBEBEB', width: '100px' } }></div>
+              { index < stepsContent.length - 2 && (
+                <div
+                  className='ms-5'
+                  style={ { borderBottom: '2px solid #EBEBEB', width: '100px' } }
+                ></div>
               ) }
             </Col>
           ) ) }
         </Row>
         <Row className='mt-3'>
           <Col className='text-center'>
+            {/* Display content based on currentStep */ }
             <p>{ stepsContent[ currentStep ] }</p>
           </Col>
         </Row>
-
         <Row className='d-flex justify-content-center align-items-center my-5'>
           <Col lg={ 4 }>
             <button className='w-75 p-2 rounded-5 ' style={ { backgroundColor: '#FFFFFF', border: '1px solid #F3B755', color: '#F3B755' } } onClick={ handleBack }>Back</button>
