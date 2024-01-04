@@ -1,12 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Glory:wght@400;500;700&display=swap');
-.pgreen{
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+.pgreen {
   color: #4E9C0B !important;
 }
-.porange{
+
+.porange {
   color: #F3B755 !important;
 }
+
 /* body{
   font-family: 'Caladea', serif;
 font-family: 'Glory', sans-serif;
 font-weight: 400;
 } */
+.alice-carousel__prev-btn,
+.alice-carousel__next-btn {
+  display: none !important;
+}
+
+/* Example CSS to hide dots */
+.alice-carousel__dots {
+  display: none !important;
+}

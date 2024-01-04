@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Container, Col } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import { Link } from "react-router-dom";
 import Step1 from './StepsPage/Step1/index.jsx';
 import Step2 from './StepsPage/Step2/index.jsx';
 import Step3 from './StepsPage/Step3/index.jsx';
@@ -17,12 +18,13 @@ const stepsContent = [
   <Step5 />,
   <Step6 />,
   <Step7 />,
-  
 ];
 
 function Dashboard ()
 {
   const [ currentStep, setCurrentStep ] = useState( 0 );
+  const [ allStepsCompleted, setAllStepsCompleted ] = useState( true );
+
   const isMobile = useMediaQuery( { maxWidth: 768 } );
 
   const handleNext = () =>
@@ -40,11 +42,25 @@ function Dashboard ()
       setCurrentStep( currentStep - 1 );
     }
   };
+  useEffect( () =>
+  {
+    setAllStepsCompleted( currentStep === stepsContent.length - 1 );
+  }, [ currentStep, stepsContent.length ] );
+
   return (
     <div>
       <Container className='mt-5'>
         <Row>
-          <p style={ { fontWeight: '500', fontSize: '32px', color: '#4C4C4C', fontFamily: 'Glory' } }>Upload Vehicle Details</p>
+          <p
+            style={ {
+              fontWeight: '500',
+              fontSize: '32px',
+              color: '#4C4C4C',
+              fontFamily: 'Glory',
+            } }
+          >
+            Upload Vehicle Details
+          </p>
         </Row>
         <Row className='m-auto' style={ { width: '90%' } }>
           {/* Mapping steps with checkboxes */ }
@@ -56,8 +72,7 @@ function Dashboard ()
                   width: isMobile ? '27px' : '42px',
                   height: isMobile ? '26px' : '40px',
                   borderRadius: '8px',
-                  backgroundColor:
-                    index < currentStep ? '#4E9C0B' : '#EBEBEB', // Change the condition for checkbox
+                  backgroundColor: index < currentStep ? '#4E9C0B' : '#EBEBEB', // Change the condition for checkbox
                   position: 'relative',
                 } }
               >
@@ -84,12 +99,52 @@ function Dashboard ()
             <p>{ stepsContent[ currentStep ] }</p>
           </Col>
         </Row>
-        <Row className='d-flex justify-content-center align-items-center my-5'>
+        {/* <Row className='d-flex justify-content-center align-items-center my-5'>
           <Col lg={ 4 }>
             <button className='w-75 p-2 rounded-5 ' style={ { backgroundColor: '#FFFFFF', border: '1px solid #F3B755', color: '#F3B755' } } onClick={ handleBack }>Back</button>
           </Col>
           <Col lg={ 4 }>
             <button className='w-75 p-2 rounded-5 border-0 ' style={ { backgroundColor: '#F3B755', color: '#FFFFFF ' } } onClick={ handleNext }>Next</button>
+          </Col>
+        </Row> */}
+        <Row className='d-flex justify-content-center align-items-center my-5'>
+          <Col lg={ 4 }>
+            { currentStep !== 0 && (
+              <button
+                className='w-75 p-2 rounded-5'
+                style={ {
+                  backgroundColor: '#FFFFFF',
+                  border: '1px solid #F3B755',
+                  color: '#F3B755',
+                } }
+                onClick={ handleBack }
+              >
+                Back
+              </button>
+            ) }
+          </Col>
+          <Col lg={ 4 }>
+            { allStepsCompleted ? (
+              <div>
+                {/* <h1>Hello</h1> */ }
+                <Link to='/PreviewPAge'>
+                  <button
+                    className='w-75 p-2 rounded-5 border-0'
+                    style={ { backgroundColor: '#F3B755', color: '#FFFFFF' } }
+                  >
+                    Confirm
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <button
+                className='w-75 p-2 rounded-5 border-0'
+                style={ { backgroundColor: '#F3B755', color: '#FFFFFF' } }
+                onClick={ handleNext }
+              >
+                Next
+              </button>
+            ) }
           </Col>
         </Row>
       </Container>

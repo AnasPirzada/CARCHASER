@@ -5,6 +5,7 @@ import './App.css';
 import Login from './app/Login/index.jsx';
 import Dashboard from './app/Dashboard/AddCard/index.jsx';
 import Stepper from './app/Dashboard/index.jsx';
+import PreviewPAge from './app/Dashboard/StepperConfirmatonPage/index.jsx';
 
 function App ()
 {
@@ -17,6 +18,7 @@ function App ()
           <Route exact path='/' element={ <Login /> } />
           <Route exact path='/Dashboard' element={ <Dashboard /> } />
           <Route exact path='/Stepper' element={ <Stepper /> } />
+          <Route exact path='/PreviewPAge' element={ <PreviewPAge /> } />
         </Routes>
 
       </BrowserRouter>
